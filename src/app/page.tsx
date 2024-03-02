@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import axios from "axios";
 
 //https://api.openweathermap.org/data/2.5/forecast?q=London&appid=${process.env.DUCKY_WEATHER_KEY}&cnt=56
 
@@ -65,17 +66,19 @@ interface WeatherData {
 }
 
 export default function Home() {
-  const { isLoading, error, data } = useQuery<WeatherData>('repoData', async () =>
-  {
-    const {data} = await axios.get('https://api.openweathermap.org/data/2.5/forecast?q=London&appid=${process.env.DUCKY_WEATHER_KEY}&cnt=56');
+  const { isLoading, error, data } = useQuery<WeatherData>
+    'repoData',
+     async () => {
+      const {data} = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=London&appid=${process.env.DUCKY_WEATHER_KEY}&cnt=56`
+        );
     return data;
   }
+  );
   //fetch('https://api.openweathermap.org/data/2.5/forecast?q=London&appid=${process.env.DUCKY_WEATHER_KEY}&cnt=56').then(res =>
   //  res.json()
   //) We're using Axios for this instead because why wouldn't you install an extra thing for every line of code that you write
-
-);
-console.log(data)
+console.log("data", data)
 if (isLoading) return 'Loading...'
 
   return (
