@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 
+//https://api.openweathermap.org/data/2.5/forecast?q=London&appid=${process.env.DUCKY_WEATHER_KEY}&cnt=56
 
 export default function Home() {
   return (
